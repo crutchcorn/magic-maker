@@ -28,6 +28,22 @@ const script = js`
 - [x] Add Babel parser to make `<BodyScript contents={fn.toString()}/>` easier
   - This will enable us to do fun stuff to generate script tag logic, such as:
   - `function getScriptFn(id) => () => querySelector(id); <BodyScript contents={getScriptFn().toString()} /> `
+- [ ] Add in `createTemplateFromComponent` logic that looks like this:
+  - This is useful when trying to create a loop of code in JS
+  - This should take the `props` from `Component` and convert them to string objects with a UUID, each.
+  - Then, when rendering back to HTML, it should convert those strings to variable names to provide at runtime
+
+```jsx
+function createElement() {
+    const template = `__TEMPLATE__`
+}
+
+const state = {};
+const template = createTemplateFromComponent(Component, state);
+const html = renderTemplate(state);
+unwrapFunctionBody(createElement.toString()).replace("__TEMPLATE__", html);
+```
+
 - [x] Add in basic integration tests with Jest DOM Testing Library
 - [ ] Add in basic E2E tests using `cli-testing-library`
 - [ ] Make `getStaticPaths` generate multiple pages. IDEK what this does currently
