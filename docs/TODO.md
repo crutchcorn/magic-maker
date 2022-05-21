@@ -6,9 +6,18 @@
   - `useEffect`
   - `useDebug`
   - `useDeferredValue`
-- [ ] Add in simple method for introducing client side logic
+- [x] Add in simple method for introducing client side logic
   - Do not use React for this - too heavy at 100kb
 - [ ] Add support for merging in-body `<head>` tags
   - Use [`rehype-css-to-top`](https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-css-to-top) as basis for code
   - Potentially use [`rehype-concat-javascript`](https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-concat-javascript) as basis
-- [ ] Add in simple method to consume SCSS
+- [x] Add in simple method to consume SCSS
+- [ ] Investigate method of providing IDE syntax highlighting for JS strings using template literal:
+
+```javascript
+const script = js`
+    console.log("Test");
+`
+```
+
+- [ ] Add in live-refresh server (no HMR) for dev mode
