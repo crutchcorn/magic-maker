@@ -35,7 +35,6 @@ export async function compilePages(dirToScan: string, outDir: string) {
             `);
       }
 
-
       const pageHTML = ReactDOM.renderToStaticMarkup(
         React.createElement(data.default, {}, [])
       );

@@ -11,7 +11,7 @@ This is a Node loader that handles the following extensions and converts them to
 - `cjs`
 - `cts`
 - `mts`
-- `css`* (exports as a `<style>` tag inside a React component)
+- `css`\* (exports as a `<style>` tag inside a React component)
 
 > \* marked files are ones that we added that were not originally present in [`@esbuild-kit/esm-loader`](https://github.com/esbuild-kit/esm-loader)
 
@@ -23,5 +23,11 @@ We didn't want to use Webpack :)
 
 These files must stay in JavaScript since:
 
-1) Node can only read JS loaders
-2) I don't want to introduce a build step yet
+1. Node can only read JS loaders
+2. I don't want to introduce a build step yet
+
+# TODO
+
+- [ ] SCSS file support
+- [ ] CSS Modules
+- [ ] SCSS modules

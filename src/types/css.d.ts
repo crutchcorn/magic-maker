@@ -1,6 +1,5 @@
-import React from "react";
-
 declare module "*.css" {
-    declare const Comp: React.FC<never>;
-    export default Comp;
+  import React from "react";
+  const Comp: React.FC<Records<string, never>>;
+  export default Comp;
 }

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --loader ./loader/loader.js dev.ts",
+    "typecheck": "tsc",
     "lint": "eslint **/*.{ts,tsx}",
     "format": "eslint **/*.{ts,tsx} --fix"
   },
@@ -35,7 +36,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2",
-    "tsx": "^3.4.0",
     "typescript": "^4.6.4"
   }
 }

@@ -5,21 +5,23 @@ import {
 
 export async function load(url, context, defaultLoad) {
   const loaded = await esbuildLoad(url, context, defaultLoad);
-  if (url.endsWith('.css')){
+  if (url.endsWith(".css")) {
     const code = loaded.source.toString();
 
+    // TODO: Extract this to a JavaScript file and run a Function.toString() and finally a REGEX.replace
+    //   This will make the DX of modifying this code SIGNIFICANTLY better
     const transformedCode = `
     import React from 'react';
     
     export default () => 
       React.createElement('style', {dangerouslySetInnerHTML: {__html: \`${code}\`}})
-    `
+    `;
 
-      return {
-        format: 'module',
-        source: transformedCode,
-      };
-    }
+    return {
+      format: "module",
+      source: transformedCode,
+    };
+  }
 
   return loaded;
 }
@@ -30,7 +32,7 @@ export async function resolve(specifier, context, defaultResolve) {
   if (resolved.url.endsWith(".css")) {
     return {
       ...resolved,
-      format: 'module',
+      format: "module",
     };
   }
 
