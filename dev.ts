@@ -5,4 +5,5 @@ import { compilePages } from "./src";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const dirToScan = resolve(__dirname, "./example");
-compilePages(dirToScan);
+const outDir = resolve(__dirname, "./dist");
+await compilePages(dirToScan, outDir);
