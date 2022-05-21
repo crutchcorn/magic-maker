@@ -21,3 +21,8 @@ const script = js`
 ```
 
 - [ ] Add in live-refresh server (no HMR) for dev mode
+- [ ] [Add in `paths` to remap `example` code to `magicmaker`, so it looks like it's using an NPM package](https://github.com/esbuild-kit/tsx/issues/15)
+- [ ] Add in TurboRepo to test example and non-example individually
+- [ ] Add Babel parser to make `<BodyScript contents={fn.toString()}/>` easier
+  - This will enable us to do fun stuff to generate script tag logic, such as: 
+  - `function getScriptFn(id) => () => querySelector(id); <BodyScript contents={getScriptFn().toString()} /> `
