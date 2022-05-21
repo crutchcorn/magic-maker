@@ -19,7 +19,12 @@ const Test = () => console.log("Test");
  */
 
 import babelParser from "@babel/parser";
-import traverse, { Node } from "@babel/traverse";
+import trav, { Node } from "@babel/traverse";
+import gen from "@babel/generator";
+
+// Typings are incorrect
+const traverse = (trav as never as { default: never }).default as typeof trav;
+const generate = (gen as never as { default: never }).default as typeof gen;
 
 const unwrapErrMsg =
   "You must only call `unwrapFunctionBody` on `function.toString()` calls";
@@ -62,5 +67,13 @@ export const unwrapFunctionBody = (jsString: string) => {
       },
     },
   });
-  return fnBodyArr;
+
+  const astToGenerate: Node = {
+    type: "Program",
+    body: fnBodyArr,
+  } as never;
+
+  const { code } = generate(astToGenerate);
+
+  return code;
 };

@@ -1,4 +1,4 @@
-import { unwrapFunctionBody } from "./src/js-parser/index.js";
+import { unwrapFunctionBody } from "./src/js-parser";
 
 const one = () => {
   console.log("one");
