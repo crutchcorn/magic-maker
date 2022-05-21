@@ -1,5 +1,5 @@
 export class PageGenerationFail extends Error {
-    constructor(message: string) {
-        super(`Page generation failure: ${message}`);
-    }
+  constructor(message: string) {
+    super(`Page generation failure: ${message}`);
+  }
 }
