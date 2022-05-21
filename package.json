@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --loader ./loader/loader.js dev.ts",
+    "test": "vitest",
     "typecheck": "tsc",
     "lint": "eslint **/*.{ts,tsx}",
     "format": "eslint **/*.{ts,tsx} --fix",
@@ -17,18 +18,21 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@testing-library/dom": "^8.13.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "rehype-javascript-to-bottom": "^3.0.0",
     "rehype-parse": "^8.0.4",
     "rehype-stringify": "^9.0.3",
-    "unified": "^10.1.2"
+    "unified": "^10.1.2",
+    "vitest": "^0.12.8"
   },
   "engines": {
     "node": "16.x"
   },
   "devDependencies": {
     "@esbuild-kit/esm-loader": "^2.1.1",
+    "@testing-library/jest-dom": "^5.16.4",
     "@types/node": "^17.0.35",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
