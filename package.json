@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@testing-library/dom": "^8.13.0",
+    "jsdom": "^19.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "rehype-javascript-to-bottom": "^3.0.0",
