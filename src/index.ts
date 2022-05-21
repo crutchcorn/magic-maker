@@ -39,15 +39,30 @@ export async function compilePages(dirToScan: string, outDir: string) {
         React.createElement(data.default, {}, [])
       );
 
-      const finalName = paths.pop() as string;
-      validatePageName(finalName, fileName);
-      await mkdirP(outDir, paths);
-      const filePath = resolve(outDir, paths.join("/"));
-      const validHTML = await createValidHTML(pageHTML);
-      await fsProm.writeFile(
-        resolve(filePath, `${finalName}.html`),
-        validHTML.toString()
-      );
+      for (const path of paths) {
+        if (Array.isArray(path)) {
+          const finalName = path.pop() as string;
+          validatePageName(finalName, fileName);
+          await mkdirP(outDir, path);
+          const filePath = resolve(outDir, ...path);
+          const validHTML = await createValidHTML(pageHTML);
+
+          await fsProm.writeFile(
+            resolve(filePath, `${finalName}.html`),
+            validHTML.toString()
+          );
+
+          continue;
+        }
+
+        const finalName = path as string;
+        validatePageName(finalName, fileName);
+        const validHTML = await createValidHTML(pageHTML);
+        await fsProm.writeFile(
+          resolve(outDir, `${finalName}.html`),
+          validHTML.toString()
+        );
+      }
 
       return;
     }

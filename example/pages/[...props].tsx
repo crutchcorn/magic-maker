@@ -8,6 +8,6 @@ export default Props;
 
 export function getStaticPaths() {
   return {
-    paths: ["test", "testing"],
+    paths: ["test", "testing", ["test", "testing"], ["one", "two", "three"]],
   };
 }

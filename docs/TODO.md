@@ -46,7 +46,7 @@ unwrapFunctionBody(createElement.toString()).replace("__TEMPLATE__", html);
 
 - [x] Add in basic integration tests with Jest DOM Testing Library
 - [ ] Add in basic E2E tests using `cli-testing-library`
-- [ ] Make `getStaticPaths` generate multiple pages. IDEK what this does currently
+- [x] Make `getStaticPaths` generate multiple pages. IDEK what this does currently
 - [ ] Add easy image optimization step
   - Step 1: Copy files to `dist` after build
   - Step 2: Host images in `dev` mode with the same name so a simple `src=""` works

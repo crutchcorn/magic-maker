@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 export async function mkdirP(base: string, paths: string[]) {
   for (let i = 0; i < paths.length; i++) {
-    const folderPath = resolve(base, [...paths].slice(0, i).join("/"));
+    const folderPath = resolve(base, ...[...paths].slice(0, i + 1));
     try {
       const stat = await fsProm.stat(folderPath);
       if (!stat.isDirectory()) {
