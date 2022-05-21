@@ -1,0 +1,9 @@
+- [ ] Create ESLint rules that you cannot use any interactive React stuff
+  - `useState`
+  - `useRef`
+  - `useReducer`
+  - `useLayoutEffect`
+  - `useEffect`
+  - `useDebug`
+  - `useDeferredValue`
+- [ ] Add in simple method for introducing client side logic (not using React)
