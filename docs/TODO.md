@@ -26,6 +26,10 @@ const script = js`
 - [ ] Add Babel parser to make `<BodyScript contents={fn.toString()}/>` easier
   - This will enable us to do fun stuff to generate script tag logic, such as:
   - `function getScriptFn(id) => () => querySelector(id); <BodyScript contents={getScriptFn().toString()} /> `
-- [ ] Add in basic integration tests with Jest DOM Testing Library
+- [x] Add in basic integration tests with Jest DOM Testing Library
 - [ ] Add in basic E2E tests using `cli-testing-library`
 - [ ] Make `getStaticPaths` generate multiple pages. IDEK what this does currently
+- [ ] Add easy image optimization step
+  - Step 1: Copy files to `dist` after build
+  - Step 2: Host images in `dev` mode with the same name so a simple `src=""` works
+  - Step 3: Add in `sharp` script to optimize all images, based on query params to `src`
