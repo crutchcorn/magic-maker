@@ -1,13 +1,9 @@
 import { createValidHTML } from "./create-valid-html";
-import { findByText, getByText } from "@testing-library/dom";
+import { getByText } from "@testing-library/dom";
 import ReactDOM from "react-dom/server";
 import React from "react";
-import { BodyScript } from "../components/script";
-import { getByTag } from "./test-utils/queries";
-
-const findAllTagsFromHTMLString = (html: string, tagNameRegex: RegExp) => [
-  ...html.matchAll(tagNameRegex),
-];
+import { BodyScript, HeadScript } from "../components/script";
+import { getAllByTag, getByTag, queryByTag } from "./test-utils/queries";
 
 const renderReactElementToString = <T extends React.FC<any>>(
   comp: T,
@@ -21,6 +17,10 @@ const renderReactElementToString = <T extends React.FC<any>>(
 
 describe("createValidHTML", () => {
   test("Create valid HTML with only one html tag", async () => {
+    const findAllTagsFromHTMLString = (html: string, tagNameRegex: RegExp) => [
+      ...html.matchAll(tagNameRegex),
+    ];
+
     const validHTML = (await createValidHTML("<div></div>")).toString();
 
     expect(findAllTagsFromHTMLString(validHTML, /<html>/g).length).toBe(1);
@@ -30,21 +30,23 @@ describe("createValidHTML", () => {
   test("Create valid HTML with only one body tag", async () => {
     const validHTML = (await createValidHTML("<div></div>")).toString();
 
-    expect(findAllTagsFromHTMLString(validHTML, /<body>/g).length).toBe(1);
-    expect(findAllTagsFromHTMLString(validHTML, /<\/body>/g).length).toBe(1);
+    document.documentElement.innerHTML = validHTML;
+
+    expect(getAllByTag(document.documentElement, "body").length).toBe(1);
   });
 
   test("Create valid HTML with only one head tag", async () => {
     const validHTML = (await createValidHTML("<div></div>")).toString();
 
-    expect(findAllTagsFromHTMLString(validHTML, /<head>/g).length).toBe(1);
-    expect(findAllTagsFromHTMLString(validHTML, /<\/head>/g).length).toBe(1);
+    document.documentElement.innerHTML = validHTML;
+
+    expect(getAllByTag(document.documentElement, "head").length).toBe(1);
   });
 
-  test("Embed HTML that's been passed in", async () => {
+  test("Embed HTML body tags that've been passed in", async () => {
     const validHTML = (await createValidHTML("<p>Test</p>")).toString();
 
-    document.body.innerHTML = validHTML;
+    document.documentElement.innerHTML = validHTML;
 
     expect(getByText(document.body, "Test")).toBeInTheDocument();
   });
@@ -58,10 +60,24 @@ describe("createValidHTML", () => {
       )
     ).toString();
 
-    document.body.innerHTML = validHTML;
+    document.documentElement.innerHTML = validHTML;
 
     const scriptTag = getByTag(document.body, "script");
     expect(scriptTag).toBeInTheDocument();
     expect(scriptTag.innerHTML).toContain('console.log("Test")');
+  });
+
+  test("Don't embed HeadScript into the body", async () => {
+    const validHTML = (
+      await createValidHTML(
+        renderReactElementToString(HeadScript, {
+          contents: `console.log("Test")`,
+        })
+      )
+    ).toString();
+
+    document.documentElement.innerHTML = validHTML;
+
+    expect(queryByTag(document.body, "script")).not.toBeInTheDocument();
   });
 });
